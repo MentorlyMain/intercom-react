@@ -22,6 +22,7 @@ _️️⚠️ Before you install the library make sure to read the [notes on rel
 <Intercom
   open
   appId="fyq3wodw"
+  languageOverride="en"
   user={{
     user_id: '9876',
     email: 'john.doe@example.com',
@@ -30,19 +31,20 @@ _️️⚠️ Before you install the library make sure to read the [notes on rel
   }}
   onOpen={() => {}}
   onClose={() => {}}
-  onUnreadCountChange={unreadCount => {}}
-  onInitialization={intercom => {}}
+  onUnreadCountChange={(unreadCount) => {}}
+  onInitialization={(intercom) => {}}
 />
 ```
 
-* `appId`: the ID of your app.
-* `user` (optional): all user data. If this changes during the lifecycle the component will call `intercom('update', userData)`.
-* `open` (optional): whether Intercom is showing or not.
-* `onOpen` (optional): called when intercom opens.
-* `onClose` (optional): called when intercom closes.
-* `onUnreadCountChange` (optional): called when the unread count changes.
-* `onInitialization` (optional): called when intercom has initialized. The component passes the `intercom` method to this callback in case you require advanced usage like [emitting events](https://developers.intercom.com/docs/intercom-javascript#section-intercomtrackevent) or [pre-populating content](https://developers.intercom.com/docs/intercom-javascript#section-intercomshownewmessage).
-* `launcher` (optional): whether a launcher button should be shown. Defaults to `true`.
+- `appId`: the ID of your app.
+- `user` (optional): all user data. If this changes during the lifecycle the component will call `intercom('update', userData)`.
+- `languageOverride` (optional): the language to display content in; overrides the browser default.
+- `open` (optional): whether Intercom is showing or not.
+- `onOpen` (optional): called when intercom opens.
+- `onClose` (optional): called when intercom closes.
+- `onUnreadCountChange` (optional): called when the unread count changes.
+- `onInitialization` (optional): called when intercom has initialized. The component passes the `intercom` method to this callback in case you require advanced usage like [emitting events](https://developers.intercom.com/docs/intercom-javascript#section-intercomtrackevent) or [pre-populating content](https://developers.intercom.com/docs/intercom-javascript#section-intercomshownewmessage).
+- `launcher` (optional): whether a launcher button should be shown. Defaults to `true`.
 
 ## How is this different?
 

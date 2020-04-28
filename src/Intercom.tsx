@@ -27,6 +27,7 @@ export interface Props {
   user?: User;
   open?: boolean;
   launcher?: boolean;
+  languageOverride?: string;
   onOpen?(): void;
   onClose?(): void;
   onUnreadCountChange?(unreadCount: number): void;
@@ -54,8 +55,12 @@ class Intercom extends React.PureComponent<Props, State> {
     frame: null,
   };
 
-  componentWillReceiveProps({open: nextOpen, user: nextUser}: Props) {
-    const {user} = this.props;
+  componentWillReceiveProps({
+    open: nextOpen,
+    user: nextUser,
+    languageOverride: nextLanguageOverride,
+  }: Props) {
+    const {languageOverride, user} = this.props;
 
     if (nextOpen) {
       this.getIntercom()('show');
@@ -63,6 +68,10 @@ class Intercom extends React.PureComponent<Props, State> {
 
     if (nextUser && !objectEqual(user || {}, nextUser)) {
       this.getIntercom()('update', nextUser);
+    }
+
+    if (nextLanguageOverride && nextLanguageOverride != languageOverride) {
+      this.getIntercom()('update', {language_override: nextLanguageOverride});
     }
   }
 
@@ -135,6 +144,7 @@ class Intercom extends React.PureComponent<Props, State> {
       user,
       onInitialization,
       launcher,
+      languageOverride,
     } = this.props;
 
     const intercom = getIntercomFromFrame(frame);
@@ -142,6 +152,7 @@ class Intercom extends React.PureComponent<Props, State> {
 
     intercom('boot', {
       app_id: appId,
+      language_override: languageOverride,
       ...user,
       hide_default_launcher: !launcher,
     });
